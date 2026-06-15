@@ -1,21 +1,25 @@
-import { Navigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import Layout from "../../components/Layout/Layout";
 
 const HomePage = () => {
-  const { user } = useSelector(
-    (state) => state.auth
-  );
-
-  if (user?.role === "admin") {
-    return <Navigate to="/admin/doctors" />;
-  }
-
-  if (user?.role === "doctor") {
-    return <Navigate to="/doctor" />;
-  }
-
   return (
-    <h1>User Dashboard</h1>
+    <Layout>
+      <div className="dashboard-grid">
+        <div className="dashboard-card">
+          <h2>Total Doctors</h2>
+          <h1>12</h1>
+        </div>
+
+        <div className="dashboard-card">
+          <h2>Appointments</h2>
+          <h1>8</h1>
+        </div>
+
+        <div className="dashboard-card">
+          <h2>Notifications</h2>
+          <h1>4</h1>
+        </div>
+      </div>
+    </Layout>
   );
 };
 

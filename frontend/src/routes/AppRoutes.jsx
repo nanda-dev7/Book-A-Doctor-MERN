@@ -8,8 +8,12 @@ import Login from "../pages/Auth/Login";
 import Register from "../pages/Auth/Register";
 
 import HomePage from "../pages/User/HomePage";
+import Notifications from "../pages/User/Notifications";
+import Appointments from "../pages/User/Appointments";
 
 import ApplyDoctor from "../pages/Doctor/ApplyDoctor";
+import DoctorDashboard from "../pages/Doctor/DoctorDashboard";
+import DoctorAppointments from "../pages/Doctor/DoctorAppointments";
 
 import AdminDashboard from "../pages/Admin/AdminDashboard";
 import DoctorsList from "../pages/Admin/DoctorsList";
@@ -19,7 +23,7 @@ import ProtectedRoute from "../components/ProtectedRoute/ProtectedRoute";
 const AppRoutes = () => {
   return (
     <Routes>
-      {/* Auth Routes */}
+      {/* Authentication */}
 
       <Route
         path="/login"
@@ -31,7 +35,7 @@ const AppRoutes = () => {
         element={<Register />}
       />
 
-      {/* User Routes */}
+      {/* User */}
 
       <Route
         path="/"
@@ -51,7 +55,45 @@ const AppRoutes = () => {
         }
       />
 
-      {/* Admin Routes */}
+      <Route
+        path="/appointments"
+        element={
+          <ProtectedRoute>
+            <Appointments />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/notifications"
+        element={
+          <ProtectedRoute>
+            <Notifications />
+          </ProtectedRoute>
+        }
+      />
+
+      {/* Doctor */}
+
+      <Route
+        path="/doctor"
+        element={
+          <ProtectedRoute>
+            <DoctorDashboard />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/doctor/appointments"
+        element={
+          <ProtectedRoute>
+            <DoctorAppointments />
+          </ProtectedRoute>
+        }
+      />
+
+      {/* Admin */}
 
       <Route
         path="/admin"
@@ -71,7 +113,7 @@ const AppRoutes = () => {
         }
       />
 
-      {/* Default Route */}
+      {/* Fallback */}
 
       <Route
         path="*"

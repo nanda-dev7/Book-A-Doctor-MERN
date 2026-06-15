@@ -1,11 +1,27 @@
-import { Button } from "antd";
-import { useSelector, useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import {
+  FaHome,
+  FaUserMd,
+  FaCalendarAlt,
+  FaBell,
+  FaUsers,
+  FaSignOutAlt,
+} from "react-icons/fa";
+
+import {
+  useNavigate,
+  useLocation,
+} from "react-router-dom";
+
+import {
+  useSelector,
+  useDispatch,
+} from "react-redux";
 
 import { logout } from "../../redux/features/authSlice";
 
 const Layout = ({ children }) => {
   const navigate = useNavigate();
+  const location = useLocation();
   const dispatch = useDispatch();
 
   const { user } = useSelector(
@@ -14,59 +30,133 @@ const Layout = ({ children }) => {
 
   const handleLogout = () => {
     localStorage.removeItem("token");
-
     dispatch(logout());
-
     navigate("/login");
   };
 
+  const userMenu = [
+    {
+      name: "Dashboard",
+      path: "/",
+      icon: <FaHome />,
+    },
+    {
+      name: "Apply Doctor",
+      path: "/apply-doctor",
+      icon: <FaUserMd />,
+    },
+    {
+      name: "Appointments",
+      path: "/appointments",
+      icon: <FaCalendarAlt />,
+    },
+    {
+      name: "Notifications",
+      path: "/notifications",
+      icon: <FaBell />,
+    },
+  ];
+
+  const adminMenu = [
+    {
+      name: "Dashboard",
+      path: "/admin",
+      icon: <FaHome />,
+    },
+    {
+      name: "Doctors",
+      path: "/admin/doctors",
+      icon: <FaUsers />,
+    },
+  ];
+
+  const doctorMenu = [
+    {
+      name: "Dashboard",
+      path: "/doctor",
+      icon: <FaHome />,
+    },
+    {
+      name: "Appointments",
+      path: "/doctor/appointments",
+      icon: <FaCalendarAlt />,
+    },
+  ];
+
+  let menuToRender = userMenu;
+
+  if (user?.role === "admin") {
+    menuToRender = adminMenu;
+  }
+
+  if (user?.role === "doctor") {
+    menuToRender = doctorMenu;
+  }
+
   return (
-    <div>
-      <div
-        style={{
-          padding: "15px",
-          background: "#1677ff",
-          color: "white",
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-        }}
-      >
-        <div>
-          <h2>Book A Doctor</h2>
+    <div className="dashboard-layout">
+      {/* Sidebar */}
+
+      <div className="sidebar">
+        <div className="logo">
+          Book A Doctor
         </div>
 
-        <div>
-          <span>
-            {user?.name}
-          </span>
-
-          <span
-            style={{
-              marginLeft: "10px",
-            }}
+        {menuToRender.map((menu) => (
+          <div
+            key={menu.path}
+            className={`menu-item ${
+              location.pathname ===
+              menu.path
+                ? "active"
+                : ""
+            }`}
+            onClick={() =>
+              navigate(menu.path)
+            }
           >
-            ({user?.role})
-          </span>
+            <span
+              style={{
+                marginRight: "10px",
+              }}
+            >
+              {menu.icon}
+            </span>
 
-          <Button
-            danger
+            {menu.name}
+          </div>
+        ))}
+
+        <div
+          className="menu-item"
+          onClick={handleLogout}
+        >
+          <FaSignOutAlt
             style={{
-              marginLeft: "15px",
+              marginRight: "10px",
             }}
-            onClick={handleLogout}
-          >
-            Logout
-          </Button>
+          />
+
+          Logout
         </div>
       </div>
 
-      <div
-        style={{
-          padding: "20px",
-        }}
-      >
-        {children}
+      {/* Main Area */}
+
+      <div className="main-content">
+        <div className="header">
+          <h3>
+            Welcome, {user?.name}
+          </h3>
+
+          <h4>
+            Role : {user?.role}
+          </h4>
+        </div>
+
+        <div className="page-content">
+          {children}
+        </div>
       </div>
     </div>
   );
