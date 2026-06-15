@@ -1,0 +1,20 @@
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhMmY5ZDc4NDZjNjgxYjNjYTUwNmUzMSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc4MTUxNTY2OCwiZXhwIjoxNzgyMTIwNDY4fQ.gAe-YsJM8H2o0TQO4eBBj-hxvuDr__r49dfdHp9tmxM
+
+
+### Book Appointment
+
+POST http://localhost:5000/api/v1/appointment/book-appointment
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "doctorId": "PASTE_DOCTOR_ID",
+  "doctorInfo": {
+    "name": "Dr Vivek"
+  },
+  "userInfo": {
+    "name": "Patient Vivek"
+  },
+  "date": "20-06-2026",
+  "time": "10:00 AM"
+}

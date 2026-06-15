@@ -5,6 +5,8 @@ import {
   registerController,
   loginController,
   currentUserController,
+  getNotificationsController,
+markAllNotificationsController,
 } from "../controllers/authController.js";
 
 const router = express.Router();
@@ -18,5 +20,20 @@ router.get(
   authMiddleware,
   currentUserController
 );
+
+
+router.get(
+  "/notifications",
+  authMiddleware,
+  getNotificationsController
+);
+
+router.post(
+  "/mark-all-notifications",
+  authMiddleware,
+  markAllNotificationsController
+);
+
+
 
 export default router;

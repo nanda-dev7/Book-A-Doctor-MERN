@@ -87,4 +87,18 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhMmY5ZDc4NDZjNjgx
 
 GET {{baseUrl}}/current-user
 
+
+
+
+
+### Get Notifications
+
+GET http://localhost:5000/api/v1/auth/notifications
+Authorization:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhMmY5ZDc4NDZjNjgxYjNjYTUwNmUzMSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc4MTUxNTY2OCwiZXhwIjoxNzgyMTIwNDY4fQ.gAe-YsJM8H2o0TQO4eBBj-hxvuDr__r49dfdHp9tmxM
+
 ###
+
+### Mark All Notifications
+
+POST http://localhost:5000/api/v1/auth/mark-all-notifications
+Authorization:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhMmY5ZDc4NDZjNjgxYjNjYTUwNmUzMSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc4MTUxNTY2OCwiZXhwIjoxNzgyMTIwNDY4fQ.gAe-YsJM8H2o0TQO4eBBj-hxvuDr__r49dfdHp9tmxM

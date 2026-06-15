@@ -1,6 +1,9 @@
 import bcrypt from "bcryptjs";
-import User from "../models/User.js";
 import jwt from "jsonwebtoken";
+import User from "../models/User.js";
+
+
+// Register User
 
 export const registerController = async (req, res) => {
   try {
@@ -14,7 +17,7 @@ export const registerController = async (req, res) => {
       });
     }
 
-    // Check existing user
+    // Check Existing User
     const existingUser = await User.findOne({ email });
 
     if (existingUser) {
@@ -24,11 +27,11 @@ export const registerController = async (req, res) => {
       });
     }
 
-    // Hash password
+    // Hash Password
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
 
-    // Create user
+    // Create User
     const user = await User.create({
       name,
       email,
@@ -55,6 +58,9 @@ export const registerController = async (req, res) => {
   }
 };
 
+
+// Login User
+
 export const loginController = async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -67,7 +73,7 @@ export const loginController = async (req, res) => {
       });
     }
 
-    // Check user
+    // Check User
     const user = await User.findOne({ email });
 
     if (!user) {
@@ -77,7 +83,7 @@ export const loginController = async (req, res) => {
       });
     }
 
-    // Compare password
+    // Compare Password
     const isMatch = await bcrypt.compare(
       password,
       user.password
@@ -111,6 +117,7 @@ export const loginController = async (req, res) => {
         name: user.name,
         email: user.email,
         role: user.role,
+        isDoctor: user.isDoctor,
       },
     });
   } catch (error) {
@@ -124,11 +131,16 @@ export const loginController = async (req, res) => {
 };
 
 
-export const currentUserController = async (req, res) => {
+// Current User
+
+export const currentUserController = async (
+  req,
+  res
+) => {
   try {
-    const user = await User.findById(req.user.id).select(
-      "-password"
-    );
+    const user = await User.findById(
+      req.user.id
+    ).select("-password");
 
     res.status(200).send({
       success: true,
@@ -143,3 +155,55 @@ export const currentUserController = async (req, res) => {
     });
   }
 };
+
+
+// Get Notifications
+
+export const getNotificationsController =
+  async (req, res) => {
+    try {
+      const user = await User.findById(req.user.id);
+
+      res.status(200).send({
+        success: true,
+        notifications: user.notifications,
+      });
+    } catch (error) {
+      console.log(error);
+
+      res.status(500).send({
+        success: false,
+        message: "Failed to fetch notifications",
+      });
+    }
+  };
+
+ 
+// Mark All Notifications Read
+
+export const markAllNotificationsController =
+  async (req, res) => {
+    try {
+      const user = await User.findById(req.user.id);
+
+      user.seenNotifications.push(
+        ...user.notifications
+      );
+
+      user.notifications = [];
+
+      await user.save();
+
+      res.status(200).send({
+        success: true,
+        message: "Notifications marked as read",
+      });
+    } catch (error) {
+      console.log(error);
+
+      res.status(500).send({
+        success: false,
+        message: "Failed to mark notifications",
+      });
+    }
+  };
