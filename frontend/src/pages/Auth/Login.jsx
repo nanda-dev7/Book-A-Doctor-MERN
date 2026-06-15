@@ -1,7 +1,13 @@
-import { Form, Input, Button, Card, message } from "antd";
+import {
+  Form,
+  Input,
+  Button,
+  Card,
+  message,
+} from "antd";
+
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { useEffect } from "react";
 
 import api from "../../services/api";
 import { loginSuccess } from "../../redux/features/authSlice";
@@ -9,14 +15,6 @@ import { loginSuccess } from "../../redux/features/authSlice";
 const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-
-    if (token) {
-      navigate("/");
-    }
-  }, [navigate]);
 
   const onFinish = async (values) => {
     try {
@@ -47,10 +45,15 @@ const Login = () => {
 
   return (
     <div className="auth-container">
-      <Card
-        title="Login"
-        style={{ width: 400 }}
-      >
+      <Card className="auth-card">
+        <div className="auth-title">
+          Book A Doctor
+        </div>
+
+        <div className="auth-subtitle">
+          Welcome Back
+        </div>
+
         <Form
           layout="vertical"
           onFinish={onFinish}
@@ -65,7 +68,7 @@ const Login = () => {
               },
             ]}
           >
-            <Input />
+            <Input size="large" />
           </Form.Item>
 
           <Form.Item
@@ -78,23 +81,19 @@ const Login = () => {
               },
             ]}
           >
-            <Input.Password />
+            <Input.Password size="large" />
           </Form.Item>
 
           <Button
             type="primary"
             htmlType="submit"
             block
+            className="auth-btn"
           >
             Login
           </Button>
 
-          <div
-            style={{
-              marginTop: 15,
-              textAlign: "center",
-            }}
-          >
+          <div className="auth-footer">
             New User?{" "}
             <Link to="/register">
               Register Here

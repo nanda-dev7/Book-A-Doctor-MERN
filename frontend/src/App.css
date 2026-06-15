@@ -1,9 +1,51 @@
 .auth-container {
   min-height: 100vh;
+  background: linear-gradient(
+    135deg,
+    #0f172a,
+    #1e293b
+  );
+
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #0f172a;
+}
+
+.auth-card {
+  width: 420px;
+  border-radius: 20px !important;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.35);
+}
+
+.auth-title {
+  text-align: center;
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: #1677ff;
+}
+
+.auth-subtitle {
+  text-align: center;
+  color: #64748b;
+  margin-bottom: 25px;
+}
+
+.auth-footer {
+  text-align: center;
+  margin-top: 15px;
+}
+
+.auth-footer a {
+  color: #1677ff;
+  font-weight: 600;
+}
+
+.auth-btn {
+  height: 45px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 8px;
 }
 
 .auth-container .ant-card {

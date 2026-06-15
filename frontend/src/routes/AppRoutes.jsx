@@ -7,23 +7,33 @@ import {
 import Login from "../pages/Auth/Login";
 import Register from "../pages/Auth/Register";
 
+// User Pages
 import HomePage from "../pages/User/HomePage";
+import Doctors from "../pages/User/Doctors";
+import BookAppointment from "../pages/User/BookAppointment";
 import Notifications from "../pages/User/Notifications";
 import Appointments from "../pages/User/Appointments";
 
+// Doctor Pages
 import ApplyDoctor from "../pages/Doctor/ApplyDoctor";
 import DoctorDashboard from "../pages/Doctor/DoctorDashboard";
 import DoctorAppointments from "../pages/Doctor/DoctorAppointments";
 
+// Admin Pages
 import AdminDashboard from "../pages/Admin/AdminDashboard";
 import DoctorsList from "../pages/Admin/DoctorsList";
 
+// Protected Route
 import ProtectedRoute from "../components/ProtectedRoute/ProtectedRoute";
+import AdminRoute from "../components/ProtectedRoute/AdminRoute";
+import DoctorRoute from "../components/ProtectedRoute/DoctorRoute";
 
 const AppRoutes = () => {
   return (
     <Routes>
-      {/* Authentication */}
+      {/* ========================= */}
+      {/* Authentication Routes */}
+      {/* ========================= */}
 
       <Route
         path="/login"
@@ -35,13 +45,33 @@ const AppRoutes = () => {
         element={<Register />}
       />
 
-      {/* User */}
+      {/* ========================= */}
+      {/* User Routes */}
+      {/* ========================= */}
 
       <Route
         path="/"
         element={
           <ProtectedRoute>
             <HomePage />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/doctors"
+        element={
+          <ProtectedRoute>
+            <Doctors />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/book-appointment/:doctorId"
+        element={
+          <ProtectedRoute>
+            <BookAppointment />
           </ProtectedRoute>
         }
       />
@@ -73,47 +103,53 @@ const AppRoutes = () => {
         }
       />
 
-      {/* Doctor */}
+      {/* ========================= */}
+      {/* Doctor Routes */}
+      {/* ========================= */}
 
       <Route
         path="/doctor"
         element={
-          <ProtectedRoute>
-            <DoctorDashboard />
-          </ProtectedRoute>
+         <DoctorRoute>
+  <DoctorDashboard />
+</DoctorRoute>
         }
       />
 
       <Route
         path="/doctor/appointments"
         element={
-          <ProtectedRoute>
-            <DoctorAppointments />
-          </ProtectedRoute>
+         <DoctorRoute>
+  <DoctorAppointments />
+</DoctorRoute>
         }
       />
 
-      {/* Admin */}
+      {/* ========================= */}
+      {/* Admin Routes */}
+      {/* ========================= */}
 
       <Route
         path="/admin"
         element={
-          <ProtectedRoute>
-            <AdminDashboard />
-          </ProtectedRoute>
+         <AdminRoute>
+  <AdminDashboard />
+</AdminRoute>
         }
       />
 
       <Route
         path="/admin/doctors"
         element={
-          <ProtectedRoute>
-            <DoctorsList />
-          </ProtectedRoute>
+          <AdminRoute>
+  <DoctorsList />
+</AdminRoute>
         }
       />
 
-      {/* Fallback */}
+      {/* ========================= */}
+      {/* Fallback Route */}
+      {/* ========================= */}
 
       <Route
         path="*"

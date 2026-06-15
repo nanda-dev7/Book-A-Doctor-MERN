@@ -35,27 +35,39 @@ const Layout = ({ children }) => {
   };
 
   const userMenu = [
-    {
-      name: "Dashboard",
-      path: "/",
-      icon: <FaHome />,
-    },
-    {
-      name: "Apply Doctor",
-      path: "/apply-doctor",
-      icon: <FaUserMd />,
-    },
-    {
-      name: "Appointments",
-      path: "/appointments",
-      icon: <FaCalendarAlt />,
-    },
-    {
-      name: "Notifications",
-      path: "/notifications",
-      icon: <FaBell />,
-    },
-  ];
+  {
+    name: "Dashboard",
+    path: "/",
+    icon: <FaHome />,
+  },
+  {
+    name: "Doctors",
+    path: "/doctors",
+    icon: <FaUserMd />,
+  },
+
+  ...(user?.isDoctor
+    ? []
+    : [
+        {
+          name: "Apply Doctor",
+          path: "/apply-doctor",
+          icon: <FaUserMd />,
+        },
+      ]),
+
+  {
+    name: "Appointments",
+    path: "/appointments",
+    icon: <FaCalendarAlt />,
+  },
+
+  {
+    name: "Notifications",
+    path: "/notifications",
+    icon: <FaBell />,
+  },
+];
 
   const adminMenu = [
     {

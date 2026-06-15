@@ -1,5 +1,13 @@
-import { Form, Input, Button, Card, message } from "antd";
+import {
+  Form,
+  Input,
+  Button,
+  Card,
+  message,
+} from "antd";
+
 import { Link, useNavigate } from "react-router-dom";
+
 import api from "../../services/api";
 
 const Register = () => {
@@ -26,10 +34,15 @@ const Register = () => {
 
   return (
     <div className="auth-container">
-      <Card
-        title="Register"
-        style={{ width: 400 }}
-      >
+      <Card className="auth-card">
+        <div className="auth-title">
+          Book A Doctor
+        </div>
+
+        <div className="auth-subtitle">
+          Create Account
+        </div>
+
         <Form
           layout="vertical"
           onFinish={onFinish}
@@ -44,7 +57,7 @@ const Register = () => {
               },
             ]}
           >
-            <Input />
+            <Input size="large" />
           </Form.Item>
 
           <Form.Item
@@ -57,7 +70,7 @@ const Register = () => {
               },
             ]}
           >
-            <Input />
+            <Input size="large" />
           </Form.Item>
 
           <Form.Item
@@ -70,23 +83,19 @@ const Register = () => {
               },
             ]}
           >
-            <Input.Password />
+            <Input.Password size="large" />
           </Form.Item>
 
           <Button
             type="primary"
             htmlType="submit"
             block
+            className="auth-btn"
           >
             Register
           </Button>
 
-          <div
-            style={{
-              marginTop: 15,
-              textAlign: "center",
-            }}
-          >
+          <div className="auth-footer">
             Already Registered?{" "}
             <Link to="/login">
               Login Here
