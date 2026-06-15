@@ -1,9 +1,9 @@
 import Doctor from "../models/Doctor.js";
 import User from "../models/User.js";
 
-// ======================
+
 // Approve Doctor
-// ======================
+
 
 export const approveDoctorController = async (
   req,
@@ -70,9 +70,9 @@ export const approveDoctorController = async (
   }
 };
 
-// ======================
+
 // Get All Doctors
-// ======================
+
 
 export const getAllDoctorsController = async (
   req,

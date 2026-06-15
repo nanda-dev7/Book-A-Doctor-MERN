@@ -1,9 +1,9 @@
 import Doctor from "../models/Doctor.js";
 import User from "../models/User.js";
 
-// ======================
+
 // Apply Doctor
-// ======================
+
 
 export const applyDoctorController = async (
   req,
@@ -47,9 +47,9 @@ export const applyDoctorController = async (
   }
 };
 
-// ======================
+
 // Get Doctor Info
-// ======================
+
 
 export const getDoctorInfoController =
   async (req, res) => {
@@ -81,9 +81,9 @@ export const getDoctorInfoController =
     }
   };
 
-// ======================
+
 // Get Approved Doctors
-// ======================
+
 
 export const getAllApprovedDoctorsController =
   async (req, res) => {
@@ -108,9 +108,9 @@ export const getAllApprovedDoctorsController =
     }
   };
 
-// ======================
+
 // Approve Doctor
-// ======================
+
 
 export const approveDoctorController =
   async (req, res) => {
@@ -179,9 +179,9 @@ export const approveDoctorController =
     }
   };
 
-// ======================
+
 // Get All Doctors
-// ======================
+
 
 export const getAllDoctorsController =
   async (req, res) => {
