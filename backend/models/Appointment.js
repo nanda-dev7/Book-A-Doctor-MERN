@@ -36,6 +36,13 @@ const appointmentSchema = new mongoose.Schema(
 
     status: {
       type: String,
+      enum: [
+        "pending",
+        "approved",
+        "rejected",
+        "completed",
+        "cancelled",
+      ],
       default: "pending",
     },
   },
@@ -43,6 +50,13 @@ const appointmentSchema = new mongoose.Schema(
     timestamps: true,
   }
 );
+
+// Index for faster appointment lookups
+appointmentSchema.index({
+  doctorId: 1,
+  date: 1,
+  time: 1,
+});
 
 const Appointment = mongoose.model(
   "Appointment",

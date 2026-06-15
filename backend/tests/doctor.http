@@ -29,3 +29,9 @@ Authorization: Bearer {{token}}
 
 PUT http://localhost:5000/api/v1/admin/approve-doctor/6a2fbfeff5fcec07dcaba781
 Authorization: Bearer {{token}}
+
+
+### Get All Approved Doctors
+
+GET http://localhost:5000/api/v1/doctor/get-all-doctors
+Authorization: Bearer {{token}}

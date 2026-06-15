@@ -1,8 +1,9 @@
 import Doctor from "../models/Doctor.js";
 import User from "../models/User.js";
 
-
-
+// ======================
+// Approve Doctor
+// ======================
 
 export const approveDoctorController = async (
   req,
@@ -11,15 +12,37 @@ export const approveDoctorController = async (
   try {
     const { doctorId } = req.params;
 
-    const doctor = await Doctor.findByIdAndUpdate(
-      doctorId,
-      {
-        status: "approved",
-      },
-      { new: true }
+    const doctor = await Doctor.findById(
+      doctorId
     );
 
-    const user = await User.findById(doctor.userId);
+    if (!doctor) {
+      return res.status(404).send({
+        success: false,
+        message: "Doctor not found",
+      });
+    }
+
+    if (doctor.status === "approved") {
+      return res.status(400).send({
+        success: false,
+        message: "Doctor already approved",
+      });
+    }
+
+    doctor.status = "approved";
+    await doctor.save();
+
+    const user = await User.findById(
+      doctor.userId
+    );
+
+    if (!user) {
+      return res.status(404).send({
+        success: false,
+        message: "User not found",
+      });
+    }
 
     user.isDoctor = true;
     user.role = "doctor";
@@ -47,12 +70,18 @@ export const approveDoctorController = async (
   }
 };
 
+// ======================
+// Get All Doctors
+// ======================
+
 export const getAllDoctorsController = async (
   req,
   res
 ) => {
   try {
-    const doctors = await Doctor.find({});
+    const doctors = await Doctor.find({}).sort({
+      createdAt: -1,
+    });
 
     res.status(200).send({
       success: true,

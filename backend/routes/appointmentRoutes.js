@@ -6,6 +6,7 @@ import {
   bookAppointmentController,
   getDoctorAppointmentsController,
   updateAppointmentStatusController,
+  getUserAppointmentsController,
 } from "../controllers/appointmentController.js";
 
 const router = express.Router();
@@ -21,6 +22,12 @@ router.get(
   "/doctor-appointments",
   authMiddleware,
   getDoctorAppointmentsController
+);
+
+router.get(
+  "/user-appointments",
+  authMiddleware,
+  getUserAppointmentsController
 );
 
 

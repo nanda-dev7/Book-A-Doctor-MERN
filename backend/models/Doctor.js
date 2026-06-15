@@ -6,31 +6,38 @@ const doctorSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
       required: true,
+      unique: true,
     },
 
     firstName: {
       type: String,
       required: true,
+      trim: true,
     },
 
     lastName: {
       type: String,
       required: true,
+      trim: true,
     },
 
     phone: {
       type: String,
       required: true,
+      trim: true,
     },
 
     email: {
       type: String,
       required: true,
+      trim: true,
+      lowercase: true,
     },
 
     specialization: {
       type: String,
       required: true,
+      trim: true,
     },
 
     experience: {
@@ -50,6 +57,7 @@ const doctorSchema = new mongoose.Schema(
 
     status: {
       type: String,
+      enum: ["pending", "approved", "rejected"],
       default: "pending",
     },
   },
@@ -58,6 +66,9 @@ const doctorSchema = new mongoose.Schema(
   }
 );
 
-const Doctor = mongoose.model("Doctor", doctorSchema);
+const Doctor = mongoose.model(
+  "Doctor",
+  doctorSchema
+);
 
 export default Doctor;
