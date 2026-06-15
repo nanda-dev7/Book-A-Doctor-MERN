@@ -22,3 +22,10 @@ Content-Type: application/json
 
 GET http://localhost:5000/api/v1/doctor/get-doctor-info
 Authorization: Bearer {{token}}
+
+
+
+### Approve Doctor
+
+PUT http://localhost:5000/api/v1/admin/approve-doctor/6a2fbfeff5fcec07dcaba781
+Authorization: Bearer {{token}}
