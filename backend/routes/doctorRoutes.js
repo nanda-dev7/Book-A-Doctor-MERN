@@ -5,6 +5,7 @@ import {
   applyDoctorController,
   getDoctorInfoController,
   getAllApprovedDoctorsController,
+  getDoctorByIdController,
 } from "../controllers/doctorController.js";
 
 const router = express.Router();
@@ -28,6 +29,13 @@ router.get(
   "/get-all-doctors",
   authMiddleware,
   getAllApprovedDoctorsController
+);
+
+
+router.get(
+  "/:id",
+  authMiddleware,
+  getDoctorByIdController
 );
 
 export default router;
