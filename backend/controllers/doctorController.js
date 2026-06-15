@@ -25,3 +25,26 @@ export const applyDoctorController = async (
     });
   }
 };
+
+export const getDoctorInfoController = async (
+  req,
+  res
+) => {
+  try {
+    const doctor = await Doctor.findOne({
+      userId: req.user.id,
+    });
+
+    res.status(200).send({
+      success: true,
+      doctor,
+    });
+  } catch (error) {
+    console.log(error);
+
+    res.status(500).send({
+      success: false,
+      message: "Failed to fetch doctor info",
+    });
+  }
+};

@@ -16,3 +16,9 @@ Content-Type: application/json
   "feesPerConsultation": 500,
   "timings": ["09:00 AM", "05:00 PM"]
 }
+
+
+### Get Doctor Info
+
+GET http://localhost:5000/api/v1/doctor/get-doctor-info
+Authorization: Bearer {{token}}
